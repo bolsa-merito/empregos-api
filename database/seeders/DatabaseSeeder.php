@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
         ]);
 
+        $this->call([
+            InstitutionSeeder::class,
+        ]);
+
         // Se você tiver outros seeders, pode chamá-los aqui também
         // $this->call(ProductSeeder::class);
     }
