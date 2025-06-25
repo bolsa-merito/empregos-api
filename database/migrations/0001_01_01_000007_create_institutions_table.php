@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
+            $table->foreignId('addresses_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
