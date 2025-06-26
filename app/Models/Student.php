@@ -29,5 +29,26 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
+
+    public function studyings()
+    {
+        return $this->hasMany(Studying::class);
+    }
+
+    public function connections()
+    {
+        return $this->hasMany(Connection::class);
+    }
+
+    public function favoriteOfCompanies()
+    {
+        return $this->hasMany(CompanyFavoriteStudent::class);
+    }
+
 }
 
