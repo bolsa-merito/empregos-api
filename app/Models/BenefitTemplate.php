@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class benefits_template extends Model
+class BenefitTemplate extends Model
 {
-    //
+    use HasFactory;
 }
