@@ -3,19 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Benefit extends Model
-{   
+{
     use HasFactory;
-    
-        public function benefitTemplate()
+
+    /**
+     * Campos preenchíveis em massa
+     */
+    protected $fillable = [
+        'benefits_template_id',
+        'company_id',
+        'description',
+    ];
+
+    /**
+     * Casts automáticos de datas
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    /**
+     * Um benefício pertence a um modelo (template) de benefício
+     */
+    public function benefitTemplate()
     {
-        return $this->belongsTo(BenefitsTemplate::class);
+        return $this->belongsTo(BenefitTemplate::class);
     }
 
+    /**
+     * Um benefício pertence a uma empresa
+     */
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
-
 }

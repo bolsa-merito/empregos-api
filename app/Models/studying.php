@@ -2,13 +2,29 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class studying extends Model
+class Studying extends Model
 {
     use HasFactory;
     
-        public function student()
+    protected $fillable = [
+        'student_id',
+        'course_id',
+        'institution_id',
+        'beginning',
+        'end',
+        'semester',
+        'period'
+    ];
+
+    protected $casts = [
+        'beginning' => 'date',
+        'end' => 'date'
+    ];
+
+    public function student()
     {
         return $this->belongsTo(Student::class);
     }
@@ -22,5 +38,4 @@ class studying extends Model
     {
         return $this->belongsTo(Institution::class);
     }
-
 }
