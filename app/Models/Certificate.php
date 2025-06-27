@@ -12,9 +12,5 @@ class Certificate extends Model
     {
         return $this->belongsTo(Student::class);
     }
-    
-    public function institution() {
-        return $this->belongsTo(Institution::class);
-    }
 
 }
