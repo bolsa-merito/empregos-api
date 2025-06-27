@@ -25,6 +25,7 @@ class Kernel extends HttpKernel {
    */
   protected $routeMiddleware = [
     'auth.basic' => IlluminateAuthMiddlewareAuthenticateWithBasicAuth::class,
+    'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
   ];
 
 }
