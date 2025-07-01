@@ -8,6 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CompanyFavoriteStudent extends Model
 {
     use HasFactory;
+
+    /**
+     * Campos preenchíveis em massa
+     */
+    protected $fillable = [
+        'student_id',
+        'company_id',
+    ];
+
+    /**
+     * Casts automáticos de datas
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
     
         public function student()
     {
