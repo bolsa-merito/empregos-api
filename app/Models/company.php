@@ -3,10 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model
 {
     use HasFactory;
+
+    /**
+     * Campos preenchíveis em massa
+     */
+    protected $fillable = [
+        'address_id',
+        'user_id',
+        'name',
+        'description',
+    ];
+
+    /**
+     * Casts automáticos de datas
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
     
     public function address()
     {
