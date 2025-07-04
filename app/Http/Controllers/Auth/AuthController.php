@@ -18,7 +18,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|in:student,company',
         ]);
 
         if ($validator->fails()) {
@@ -29,10 +30,11 @@ class AuthController extends Controller
         }
 
         try {
-            $user = User::create([
+                $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role' => $request->role, // Add this line
             ]);
 
             // Enviar email de verificação diretamente
@@ -104,6 +106,11 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
+        if (!$request->user()) {
+            return response()->json([
+                'message' => 'Usuário não autenticado'
+            ], 401);
+        }
         return response()->json([
             'user' => $request->user(),
             'email_verified' => $request->user()->hasVerifiedEmail()
