@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
-            $table->string('area')->unique; // exemplo: "Tecnologia", "Engenharia"
+            $table->string('name'); // exemplo: "Tecnologia", "Engenharia"
             $table->timestamps();
         });
     }
