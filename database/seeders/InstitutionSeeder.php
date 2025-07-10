@@ -11,8 +11,7 @@ class InstitutionSeeder extends Seeder
     public function run(): void
     {
         $addresses = [
-            ['state' => 'SP', 'city' => 'São Paulo', 'neighborhood' => 'Centro', 'street' => 'Av. Paulista', 'number' => '1000'],
-            ['state' => 'RJ', 'city' => 'Rio de Janeiro', 'neighborhood' => 'Botafogo', 'street' => 'Rua São Clemente', 'number' => '500'],
+            ['state' => 'SC', 'city' => 'Mafra', 'neighborhood' => 'Jardim do Moinho', 'street' => 'Av. Nereu Ramos', 'number' => '1071'],
         ];
 
         foreach ($addresses as $data) {

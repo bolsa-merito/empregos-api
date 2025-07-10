@@ -10,10 +10,9 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         $courses = [
-            ['name' => 'Engenharia Civil', 'area' => 'Engenharia'],
             ['name' => 'Engenharia Elétrica', 'area' => 'Engenharia'],
             ['name' => 'Arquitetura e Urbanismo', 'area' => 'Arquitetura'],
-            ['name' => 'Sistemas de Informação', 'area' => 'Tecnologia da Informação'],
+            ['name' => 'Emgenharia de Software', 'area' => 'Tecnologia da Informação'],
             ['name' => 'Direito', 'area' => 'Direito'],
         ];
 
