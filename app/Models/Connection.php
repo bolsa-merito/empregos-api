@@ -9,15 +9,12 @@ class Connection extends Model
 {
     use HasFactory;
 
-    /**
-     * Campos preenchíveis em massa
-     */
     protected $fillable = [
         'student_id',
         'company_id',
         'status',
     ];
-
+    
     /**
      * Casts automáticos de datas
      */

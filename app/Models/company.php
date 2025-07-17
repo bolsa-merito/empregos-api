@@ -26,10 +26,7 @@ class Company extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * A empresa pertence a um endereço
-     */
+    
     public function address()
     {
         return $this->belongsTo(Address::class);

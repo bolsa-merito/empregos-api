@@ -9,12 +9,12 @@ class Certificate extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * Campos preenchíveis em massa
      */
     protected $fillable = [
         'student_id',
-        'institution_id',
+        'institution',
         'course_name',
         'course_load',
     ];
@@ -26,10 +26,7 @@ class Certificate extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * Um certificado pertence a um aluno
-     */
+    
     public function student()
     {
         return $this->belongsTo(Student::class);

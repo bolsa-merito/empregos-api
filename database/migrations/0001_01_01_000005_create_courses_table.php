@@ -14,7 +14,7 @@ return new class extends Migration
          Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('area')->nullable(); // exemplo: "Tecnologia", "Engenharia"
+            $table->foreignId('area_id')->constrained()->onDelete('cascade'); // exemplo: "Tecnologia", "Engenharia"
             $table->timestamps();
         });
     }

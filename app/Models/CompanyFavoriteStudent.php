@@ -24,11 +24,8 @@ class CompanyFavoriteStudent extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * O favorito pertence a um estudante
-     */
-    public function student()
+    
+        public function student()
     {
         return $this->belongsTo(Student::class);
     }

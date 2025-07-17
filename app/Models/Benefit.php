@@ -9,7 +9,7 @@ class Benefit extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * Campos preenchíveis em massa
      */
     protected $fillable = [
@@ -25,10 +25,7 @@ class Benefit extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * Um benefício pertence a um modelo (template) de benefício
-     */
+    
     public function benefitTemplate()
     {
         return $this->belongsTo(BenefitTemplate::class);

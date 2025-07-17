@@ -15,4 +15,9 @@ class Course extends Model
     {
         return $this->hasMany(Studying::class);
     }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

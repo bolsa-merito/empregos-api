@@ -4,20 +4,23 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Institution;
+use App\Models\Address;
 
 class InstitutionSeeder extends Seeder
 {
     public function run(): void
     {
-        $institutions = [
-            ['name' => 'Universidade Federal do Rio de Janeiro', 'city' => 'Rio de Janeiro', 'state' => 'RJ'],
-            ['name' => 'Universidade de São Paulo', 'city' => 'São Paulo', 'state' => 'SP'],
-            ['name' => 'Instituto Federal do Ceará', 'city' => 'Fortaleza', 'state' => 'CE'],
-            ['name' => 'Universidade Federal de Minas Gerais', 'city' => 'Belo Horizonte', 'state' => 'MG'],
+        $addresses = [
+            ['state' => 'SC', 'city' => 'Mafra', 'neighborhood' => 'Jardim do Moinho', 'street' => 'Av. Nereu Ramos', 'number' => '1071'],
         ];
 
-        foreach ($institutions as $institution) {
-            Institution::create($institution);
+        foreach ($addresses as $data) {
+            $address = Address::create($data);
+
+            Institution::create([
+                'name' => 'Instituição em ' . $data['city'],
+                'address_id' => $address->id,
+            ]);
         }
     }
 }

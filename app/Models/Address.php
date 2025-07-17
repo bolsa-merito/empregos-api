@@ -27,10 +27,7 @@ class Address extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    /**
-     * Uma Address pode estar associada a várias empresas
-     */
+    
     public function companies()
     {
         return $this->hasMany(Company::class);

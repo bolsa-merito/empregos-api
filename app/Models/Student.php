@@ -25,6 +25,11 @@ class Student extends Model
         'looking_for_internship' => 'boolean',
     ];
 
+    public function experience_and_project()
+    {
+        return $this->belongsTo(experience_and_project::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

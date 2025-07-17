@@ -24,9 +24,6 @@ class BenefitTemplate extends Model
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Um modelo de benefício pode estar associado a vários benefícios
-     */
     public function benefits()
     {
         return $this->hasMany(Benefit::class);
