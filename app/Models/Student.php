@@ -34,4 +34,9 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function studyings()
+    {
+        return $this->hasMany(Studying::class);
+    }
 }
