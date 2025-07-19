@@ -34,32 +34,39 @@ class StudyingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Studying $studying)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return $studying;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Studying $studying)
     {
-        //
+        $validated = $request->validate([
+            'student_id' => 'sometimes',
+            'course_id' => 'sometimes|required|exists:courses,id',
+            'institution_id' => 'required|exists:institutions,id',
+            'beginning' => 'sometimes|required|string',
+            'end' => 'sometimes|required|string',
+            'semester' => 'sometimes|required|string',
+            'period' => 'sometimes|required|string'
+        ]);
+
+        unset($validated['student_id']);
+
+        $studying->update($validated);
+        return $studying;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Studying $studying)
     {
-        //
+        $studying->delete();
+
+        return response()->json(['message' => 'Cursando deletado com sucesso']);
     }
 }
