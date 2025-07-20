@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('experience_and_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('Title');
-            $table->string('Description');
+            $table->string('title');
+            $table->string('description');
             $table->timestamps();
+            $table->foreignId('student_id')->constrained();
         });
     }
 
