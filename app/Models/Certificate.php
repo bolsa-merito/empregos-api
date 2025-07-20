@@ -31,12 +31,4 @@ class Certificate extends Model
     {
         return $this->belongsTo(Student::class);
     }
-
-    /**
-     * Um certificado pertence a uma instituição
-     */
-    public function institution()
-    {
-        return $this->belongsTo(Institution::class);
-    }
 }
