@@ -9,5 +9,15 @@ class Institution extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'city', 'state'];
+    protected $fillable = ['name', 'address_id'];
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function studyings()
+    {
+        return $this->hasMany(Studying::class);
+    }
 }

@@ -1,0 +1,28 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/project-and-experience
+
+### GET all project-and-experience
+GET {{apiurl}} HTTP/1.1
+
+### POST cria project-and-experience
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"title": "Laravel",
+	"description": "Curso online",
+	"student_id": 1
+}
+
+### PUT atualiza o project-and-experience pelo id
+PUT {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+	"title": "React",
+	"description": "Curso online"
+}
+
+### DELETE deleta o project-and-experience pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json

@@ -40,6 +40,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $student->load(['studyings.course', 'studyings.institution', 'experience_and_project', 'certificates']);
+
         return $student;
     }
 

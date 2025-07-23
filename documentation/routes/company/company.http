@@ -1,0 +1,29 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/company
+
+### GET all company
+GET {{apiurl}} HTTP/1.1
+
+### POST cria company
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"user_id": 1,
+	"name": "Empresa teste",
+	"description": "Testando a company"
+}
+
+### PUT atualiza o company pelo id
+PUT {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": "Testandoooo",
+	"description": "Testando a company",
+	"address_id": 2
+}
+
+### DELETE deleta o company pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json

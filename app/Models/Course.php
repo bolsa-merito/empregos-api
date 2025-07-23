@@ -10,4 +10,14 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'area'];
+
+    public function studyings()
+    {
+        return $this->hasMany(Studying::class);
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }
