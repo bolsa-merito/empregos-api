@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\StudyingController;
@@ -28,6 +29,8 @@ Route::apiResource('certificates', CertificateController::class);
 Route::apiResource('company', CompanyController::class);
 
 Route::apiResource('address', AddressController::class);
+
+Route::apiResource('areas', AreaController::class);
 
 
 // Rotas de autenticação
