@@ -1,0 +1,18 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/areas
+
+### GET all company
+GET {{apiurl}} HTTP/1.1
+
+### POST cria company
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": "Engenharia Civil",
+	"area_id": 1
+}
+
+### GET pega student pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
