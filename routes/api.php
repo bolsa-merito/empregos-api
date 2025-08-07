@@ -10,16 +10,22 @@ use App\Http\Controllers\Api\StudyingController;
 use App\Http\Controllers\Api\CertificateController;
 use App\Http\Controllers\Api\InstitutionController;
 use App\Http\Controllers\Api\ExperienceAndProjectController;
+use App\Http\Controllers\Api\FormationController;
+use App\Http\Controllers\Api\ProfileController;
 
 Route::apiResource('students', StudentController::class);
 
 Route::apiResource('courses', CourseController::class);
 
+Route::apiResource('formations', FormationController::class);
+
+Route::apiResource('profiles', ProfileController::class);
+
 Route::apiResource('institutions', InstitutionController::class);
 
 Route::apiResource('studying', StudyingController::class);
 
-Route::apiResource('project-and-experience', ExperienceAndProjectController::class);
+Route::apiResource('experience-and-project', ExperienceAndProjectController::class);
 
 Route::apiResource('certificates', CertificateController::class);
 
