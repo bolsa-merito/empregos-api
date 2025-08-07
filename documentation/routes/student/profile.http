@@ -1,0 +1,35 @@
+### Variables
+@apiurl = http://127.0.0.1:8000/api/profiles
+
+### GET all profiles
+GET {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+### POST cria novo profile (sem imagem)
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "João da Silva",
+  "course": "Engenharia de Software",
+  "institution": "Universidade Federal",
+  "semester": "3",
+  "period": "Noturno",
+  "skills": ["React", "Node.js"]
+}
+
+### GET profile por ID
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+### PUT atualiza profile
+PUT {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "course": "Ciência da Computação",
+  "period": "Integral"
+}
+
+### DELETE profile
+DELETE {{apiurl}}/1 HTTP/1.1

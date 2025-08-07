@@ -1,0 +1,36 @@
+### Variables
+@apiurl = http://127.0.0.1:8000/api/formations
+
+### GET all formations
+GET {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+### POST cria uma nova formação
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "course": "Engenharia de Software",
+  "start_date": "2022-08-01",
+  "end_date": "2026-06-30",
+  "institution": "Universidade do Contestado"
+}
+
+### GET pega formação pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+### PUT atualiza a formação pelo id
+PUT {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "course": "Engenharia de Software",
+  "start_date": "2023-01-01",
+  "end_date": "2026-12-15",
+  "institution": "Universidade Estadual de SC"
+}
+
+### DELETE deleta formação pelo id
+DELETE {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
