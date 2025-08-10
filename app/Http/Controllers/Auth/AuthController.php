@@ -109,9 +109,17 @@ class AuthController extends Controller
                 'message' => 'Usuário não autenticado'
             ], 401);
         }
+
+        $request->user()->role === 'student' ? $request->user()->load('student') : $request->user()->load('company');
+
         return response()->json([
             'user' => $request->user(),
             'email_verified' => $request->user()->hasVerifiedEmail()
         ]);
+    }
+
+    public function show(User $user)
+    {
+        return $user;
     }
 }
