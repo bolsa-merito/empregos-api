@@ -117,9 +117,4 @@ class AuthController extends Controller
             'email_verified' => $request->user()->hasVerifiedEmail()
         ]);
     }
-
-    public function show(User $user)
-    {
-        return $user;
-    }
 }
