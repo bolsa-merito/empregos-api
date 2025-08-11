@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -48,7 +49,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function updateAuthenticated(Request $request)
     {
         $validated = $request->validate([
             'first_name' => 'sometimes|required|string',
@@ -60,8 +61,24 @@ class StudentController extends Controller
             'phone_number' => 'nullable|string',
         ]);
 
+        // Pega o usuário autenticado pelo token
+        $user = Auth::user();
+
+        // Garante que ele seja realmente um estudante
+        if ($user->role !== 'student') {
+            return response()->json(['error' => 'Apenas estudantes podem atualizar esse perfil.'], 403);
+        }
+
+        // Busca o estudante vinculado ao usuário
+        $student = $user->student; // relação definida no model User
+
+        if (!$student) {
+            return response()->json(['error' => 'Perfil de estudante não encontrado.'], 404);
+        }
+
         $student->update($validated);
-        return $student;
+
+        return response()->json($student);
     }
 
     /**
