@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\ExperienceAndProjectController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 
-Route::apiResource('students', StudentController::class);
+Route::apiResource('students', StudentController::class)->except(['update']);
 
 Route::apiResource('courses', CourseController::class);
 
@@ -32,6 +32,12 @@ Route::apiResource('address', AddressController::class);
 
 Route::apiResource('areas', AreaController::class);
 
+Route::prefix('students/update')->group(function () {
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::put('/profile', [StudentController::class, 'updateAuthenticated']);
+    });
+});
 
 // Rotas de autenticação
 Route::prefix('auth')->group(function () {
