@@ -36,6 +36,8 @@ Route::prefix('students/update')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::put('/profile', [StudentController::class, 'updateAuthenticated']);
+        Route::post('/experience', [ExperienceAndProjectController::class, 'storeAuthenticated']);
+        Route::put('/experience/{experience}', [ExperienceAndProjectController::class, 'updateAuthenticated']);
     });
 });
 
