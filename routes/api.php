@@ -12,6 +12,9 @@ use App\Http\Controllers\Api\InstitutionController;
 use App\Http\Controllers\Api\ExperienceAndProjectController;
 use App\Http\Controllers\Api\FormationController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\BenefitsEnterpriseController;
+use App\Http\Controllers\CompanyInfoController;
 
 Route::apiResource('students', StudentController::class);
 
@@ -32,3 +35,9 @@ Route::apiResource('certificates', CertificateController::class);
 Route::apiResource('company', CompanyController::class);
 
 Route::apiResource('address', AddressController::class);
+
+Route::apiResource('proposal', ProposalController::class);
+
+Route::apiResource('benefits-enterprise', BenefitsEnterpriseController::class);
+
+Route::apiResource('company-info', CompanyInfoController::class);
