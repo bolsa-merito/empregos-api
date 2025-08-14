@@ -1,0 +1,28 @@
+### Listar descrições
+GET http://localhost:8000/api/descriptions
+
+### Criar descrição
+POST http://localhost:8000/api/descriptions
+Content-Type: application/json
+
+{
+  "description": "Desenvolvedor Full Stack .",
+  "email": "usuario@example.com",
+  "phone": "(11) 99999-8888"
+}
+
+### Buscar descrição por ID
+GET http://localhost:8000/api/descriptions/1
+
+### Atualizar descrição
+PUT http://localhost:8000/api/descriptions/1
+Content-Type: application/json
+
+{
+  "description": "Desenvolvedor com foco em Laravel e React.",
+  "email": "usuario@example.com",
+  "phone": "(11) 98888-7777"
+}
+
+### Deletar descrição
+DELETE http://localhost:8000/api/descriptions/1

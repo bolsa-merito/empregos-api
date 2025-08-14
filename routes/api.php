@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\BenefitsEnterpriseController;
 use App\Http\Controllers\CompanyInfoController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\DescriptionController;
 
 Route::apiResource('students', StudentController::class);
 
@@ -41,3 +43,7 @@ Route::apiResource('proposal', ProposalController::class);
 Route::apiResource('benefits-enterprise', BenefitsEnterpriseController::class);
 
 Route::apiResource('company-info', CompanyInfoController::class);
+
+Route::apiResource('projects', ProjectController::class);
+
+Route::apiResource('descriptions', DescriptionController::class);

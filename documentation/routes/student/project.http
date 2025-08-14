@@ -1,0 +1,36 @@
+### Listar projetos
+GET http://localhost:8000/api/projects
+
+
+### Criar projeto
+POST http://localhost:8000/api/projects
+Content-Type: application/json
+
+{
+  "projects": [
+    {
+      "title": "Sistema de Gestão Escolar",
+      "description": "Aplicativo web para gerenciar alunos, professores e notas.",
+      "skills": "[\"Laravel\", \"React\", \"MySQL\"]"
+    }
+  ]
+}
+
+### Listar projetos
+GET http://localhost:8000/api/projects
+
+### Buscar projeto por ID
+GET http://localhost:8000/api/projects/1
+
+### Atualizar projeto
+PUT http://localhost:8000/api/projects/1
+Content-Type: application/json
+
+{
+  "title": "Sistema de Gestão Escolar - Versão 2",
+  "description": "Sistema otimizado com funcionalidades extras.",
+  "skills": "[\"Laravel\", \"React\", \"PostgreSQL\"]"
+}
+
+### Deletar projeto
+DELETE http://localhost:8000/api/projects/1
