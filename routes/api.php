@@ -36,8 +36,14 @@ Route::prefix('students/update')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::put('/profile', [StudentController::class, 'updateAuthenticated']);
+
         Route::post('/experience', [ExperienceAndProjectController::class, 'storeAuthenticated']);
         Route::put('/experience/{experience}', [ExperienceAndProjectController::class, 'updateAuthenticated']);
+        Route::delete('/experience/{experience}', [ExperienceAndProjectController::class, 'destroyAuthenticated']);
+
+        Route::post('/certificate', [CertificateController::class, 'storeAuthenticated']);
+        Route::put('/certificate/{certificate}', [CertificateController::class, 'updateAuthenticated']);
+        Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroyAuthenticated']);
     });
 });
 
