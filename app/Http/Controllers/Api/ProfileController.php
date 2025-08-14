@@ -22,11 +22,10 @@ class ProfileController extends Controller
             'institution' => 'required|string',
             'semester' => 'required|string',
             'period' => 'required|string',
-            'skills' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'skills.*' => 'string',
             'image' => 'nullable|image|max:2048',
         ]);
-
-        $data['skills'] = json_decode($request->input('skills'), true);
 
         if ($request->hasFile('image')) {
             $data['image_path'] = $request->file('image')->store('profiles', 'public');
@@ -52,11 +51,10 @@ class ProfileController extends Controller
             'institution' => 'sometimes|string',
             'semester' => 'sometimes|string',
             'period' => 'sometimes|string',
-            'skills' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'skills.*' => 'string',
             'image' => 'nullable|image|max:2048',
         ]);
-
-        $data['skills'] = json_decode($request->input('skills'), true);
 
         if ($request->hasFile('image')) {
             if ($profile->image_path) {
@@ -69,6 +67,7 @@ class ProfileController extends Controller
 
         return response()->json($profile);
     }
+
 
     public function destroy($id)
     {
