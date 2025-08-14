@@ -81,9 +81,20 @@ class ExperienceAndProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ExperienceAndProject $project_and_experience)
+    public function destroyAuthenticated(Request $request, $id)
     {
-        $project_and_experience->delete();
-        return response()->json(['message' => 'Experiencia deletada'], 204);
+        $user = Auth::user();
+
+        if ($user->role !== 'student') {
+            return response()->json(['message' => 'Apenas estudantes podem excluir experiências.'], 403);
+        }
+
+        $experience = ExperienceAndProject::whereHas('student', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->findOrFail($id);
+
+        $experience->delete();
+
+        return response()->json(['message' => 'Experiência excluída com sucesso.'], 200);
     }
 }
