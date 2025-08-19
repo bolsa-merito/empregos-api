@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Studying;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudyingController extends Controller
 {
@@ -16,10 +17,15 @@ class StudyingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeAuthenticated(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->role !== 'student') {
+            return response()->json(['message' => 'Apenas estudantes podem adicionar cursos.'], 403);
+        }
+
         $validated = $request->validate([
-            'student_id' => 'required|exists:students,id',
             'course_id' => 'required|exists:courses,id',
             'institution_id' => 'required|exists:institutions,id',
             'beginning' => 'required|string',
@@ -28,45 +34,52 @@ class StudyingController extends Controller
             'period' => 'required|string'
         ]);
 
-        return Studying::create($validated);
+        $studying = $user->student->studyings()->create($validated);
+
+        return response()->json($studying, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Studying $studying)
+    public function updateAuthenticated(Request $request, Studying $studying)
     {
-        return $studying;
-    }
+        $user = Auth::user();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Studying $studying)
-    {
+        if ($user->role !== 'student') {
+            return response()->json(['message' => 'Apenas estudantes podem atualizar cursos.'], 403);
+        }
+
+        // Garante que o registro pertence ao estudante autenticado
+        if ($studying->student_id !== $user->student->id) {
+            return response()->json(['message' => 'Não autorizado.'], 403);
+        }
+
         $validated = $request->validate([
-            'student_id' => 'sometimes',
             'course_id' => 'sometimes|required|exists:courses,id',
-            'institution_id' => 'required|exists:institutions,id',
+            'institution_id' => 'sometimes|required|exists:institutions,id',
             'beginning' => 'sometimes|required|string',
             'end' => 'sometimes|required|string',
             'semester' => 'sometimes|required|string',
             'period' => 'sometimes|required|string'
         ]);
 
-        unset($validated['student_id']);
-
         $studying->update($validated);
-        return $studying;
+
+        return response()->json($studying);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Studying $studying)
+    public function destroyAuthenticated(Studying $studying)
     {
+        $user = Auth::user();
+
+        if ($user->role !== 'student') {
+            return response()->json(['message' => 'Apenas estudantes podem excluir cursos.'], 403);
+        }
+
+        if ($studying->student_id !== $user->student->id) {
+            return response()->json(['message' => 'Não autorizado.'], 403);
+        }
+
         $studying->delete();
 
-        return response()->json(['message' => 'Cursando deletado com sucesso']);
+        return response()->json(['message' => 'Curso removido com sucesso.']);
     }
 }
