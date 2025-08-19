@@ -44,4 +44,9 @@ class Student extends Model
     {
         return $this->hasMany(Certificate::class);
     }
+
+    public function connections()
+    {
+        return $this->hasMany(Connection::class);
+    }
 }
