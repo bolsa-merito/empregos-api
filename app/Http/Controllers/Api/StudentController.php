@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        // Exige autenticação para todos os métodos exceto show
+        $this->middleware('auth:sanctum')->except(['show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -17,8 +23,9 @@ class StudentController extends Controller
         return Student::all();
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created student (apenas para o usuário logado).
      */
     public function store(Request $request)
     {
@@ -30,20 +37,33 @@ class StudentController extends Controller
             'description' => 'nullable|string',
             'contact_email' => 'nullable|email',
             'phone_number' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
         ]);
 
-        return Student::create($validated);
+        $user = Auth::user();
+
+        // Impede que um mesmo usuário crie mais de um perfil de estudante
+        if ($user->student) {
+            return response()->json(['message' => 'Este usuário já possui um perfil de estudante.'], 400);
+        }
+
+        $student = $user->student()->create($validated);
+
+        return response()->json($student, 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified student (público).
      */
     public function show(Student $student)
     {
-        $student->load(['studyings.course', 'studyings.institution', 'experience_and_project', 'certificates']);
+        $student->load([
+            'studyings.course',
+            'studyings.institution',
+            'experience_and_project',
+            'certificates'
+        ]);
 
-        return $student;
+        return response()->json($student);
     }
 
     /**

@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\InstitutionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\ExperienceAndProjectController;
 
-Route::apiResource('students', StudentController::class)->except(['update']);
+Route::apiResource('students', StudentController::class)->except(['update', 'store']);
 
 Route::apiResource('courses', CourseController::class);
 
@@ -39,6 +39,10 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::apiResource('address', AddressController::class);
 
 Route::apiResource('areas', AreaController::class);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/students', [StudentController::class, 'store']);
+});
 
 Route::prefix('students/update')->group(function () {
 
