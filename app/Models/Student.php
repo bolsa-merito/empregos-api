@@ -27,11 +27,21 @@ class Student extends Model
 
     public function experience_and_project()
     {
-        return $this->belongsTo(experience_and_project::class);
+        return $this->hasMany(ExperienceAndProject::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function studyings()
+    {
+        return $this->hasMany(Studying::class);
+    }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
     }
 }

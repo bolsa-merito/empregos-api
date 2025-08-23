@@ -1,0 +1,26 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/auth
+
+### GET users
+GET {{apiurl}}/user HTTP/1.1
+
+### POST auth nesse exemplo cria um student
+POST {{apiurl}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "emailteste@gmail.com",
+    "password": "12345678",
+    "password_confirmation": "12345678",
+	"role": "student"
+}
+
+### POST auth
+POST {{apiurl}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "emailteste@gmail.com",
+    "password": "12345678"
+}
+
