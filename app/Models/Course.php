@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'area'];
+    protected $fillable = ['name', 'area_id'];
 
     public function studyings()
     {

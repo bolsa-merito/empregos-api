@@ -15,7 +15,7 @@ class ExperienceAndProject extends Model
         'student_id'
     ];
 
-    public function students()
+    public function student()
     {
         return $this->belongsTo(Student::class);
     }

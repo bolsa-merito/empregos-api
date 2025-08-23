@@ -1,0 +1,18 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/courses
+
+### GET all course
+GET {{apiurl}} HTTP/1.1
+
+### POST cria course
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+	"name": "Engenharia Civil",
+	"area_id": 1
+}
+
+### GET pega course pelo id
+GET {{apiurl}}/3 HTTP/1.1
+Content-Type: application/json

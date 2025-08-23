@@ -24,8 +24,9 @@ GET {{apiurl}}/1 HTTP/1.1
 Content-Type: application/json
 
 ### PUT atualiza o student pelo id
-PUT {{apiurl}}/1 HTTP/1.1
+PUT {{apiurl}}/update/profile HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {token}
 
 {
   "first_name": "J",
