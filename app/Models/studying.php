@@ -23,21 +23,6 @@ class Studying extends Model
         'beginning' => 'date',
         'end' => 'date'
     ];
-    
-    protected $fillable = [
-        'student_id',
-        'course_id',
-        'institution_id',
-        'beginning',
-        'end',
-        'semester',
-        'period'
-    ];
-
-    protected $casts = [
-        'beginning' => 'date',
-        'end' => 'date'
-    ];
 
     public function student()
     {

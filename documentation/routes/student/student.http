@@ -1,0 +1,40 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/students
+
+### GET all students
+GET {{apiurl}} HTTP/1.1
+
+### POST cria student
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "first_name": "João",
+  "last_name": "Silva",
+  "birth_date": "2000-01-01",
+  "looking_for_internship": true,
+  "description": "Estudante de Engenharia de Software",
+  "contact_email": "joao@email.com",
+  "phone_number": "11999999999",
+  "user_id": 1
+}
+
+### GET pega student pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+### PUT atualiza o student pelo id
+PUT {{apiurl}}/update/profile HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {token}
+
+{
+  "first_name": "J",
+  "last_name": "Silva",
+  "birth_date": "2000-01-01",
+  "looking_for_internship": true,
+  "description": "Estudante de Engenharia de Software",
+  "contact_email": "joao@email.com",
+  "phone_number": "11999999999",
+  "user_id": 1
+}

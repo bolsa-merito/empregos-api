@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        // Exige autenticação para todos os métodos exceto show
+        $this->middleware('auth:sanctum')->except(['show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,8 +23,9 @@ class StudentController extends Controller
         return Student::all();
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created student (apenas para o usuário logado).
      */
     public function store(Request $request)
     {
@@ -29,24 +37,39 @@ class StudentController extends Controller
             'description' => 'nullable|string',
             'contact_email' => 'nullable|email',
             'phone_number' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
         ]);
 
-        return Student::create($validated);
+        $user = Auth::user();
+
+        // Impede que um mesmo usuário crie mais de um perfil de estudante
+        if ($user->student) {
+            return response()->json(['message' => 'Este usuário já possui um perfil de estudante.'], 400);
+        }
+
+        $student = $user->student()->create($validated);
+
+        return response()->json($student, 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified student (público).
      */
     public function show(Student $student)
     {
-        return $student;
+        $student->load([
+            'studyings.course',
+            'studyings.institution',
+            'experience_and_project',
+            'certificates'
+        ]);
+
+        return response()->json($student);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function updateAuthenticated(Request $request)
     {
         $validated = $request->validate([
             'first_name' => 'sometimes|required|string',
@@ -58,8 +81,24 @@ class StudentController extends Controller
             'phone_number' => 'nullable|string',
         ]);
 
+        // Pega o usuário autenticado pelo token
+        $user = Auth::user();
+
+        // Garante que ele seja realmente um estudante
+        if ($user->role !== 'student') {
+            return response()->json(['error' => 'Apenas estudantes podem atualizar esse perfil.'], 403);
+        }
+
+        // Busca o estudante vinculado ao usuário
+        $student = $user->student; // relação definida no model User
+
+        if (!$student) {
+            return response()->json(['error' => 'Perfil de estudante não encontrado.'], 404);
+        }
+
         $student->update($validated);
-        return $student;
+
+        return response()->json($student);
     }
 
     /**

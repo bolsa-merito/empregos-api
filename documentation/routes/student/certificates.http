@@ -1,0 +1,30 @@
+### Variables 
+@apiurl = http://127.0.0.1:8000/api/certificates
+
+### GET all certificates
+GET {{apiurl}} HTTP/1.1
+
+### POST cria certificates
+POST {{apiurl}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "student_id": "1",
+  "institution": "Universidade Federal de Santa Catarina",
+  "course_name": "Engenharia de Software",
+  "course_load": "Integral"
+}
+
+### PUT atualiza o certificates pelo id
+PUT {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "institution": "Universidade Federal de Santa Catarina",
+  "course_name": "Engenharia de Software",
+  "course_load": "Noturno"
+}
+
+### DELETE deleta o certificates pelo id
+GET {{apiurl}}/1 HTTP/1.1
+Content-Type: application/json

@@ -17,7 +17,7 @@ class CourseController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'area' => 'nullable|string',
+            'area_id' => 'required|exists:areas,id',
         ]);
 
         return Course::create($validated);
@@ -25,14 +25,23 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return $course;
+        $course->load('studyings.student');
+
+        $students = $course->studyings->map(function ($studying) {
+            return $studying->student;
+        });
+
+        return response()->json([
+            'course' => $course->only(['id', 'name', 'area_id']),
+            'students' => $students,
+        ]);
     }
 
     public function update(Request $request, Course $course)
     {
         $validated = $request->validate([
             'name' => 'sometimes|required|string',
-            'area' => 'nullable|string',
+            'area_id' => 'sometimes|required|exists:areas,id',
         ]);
 
         $course->update($validated);

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('contact_email')->nullable();
             $table->string('phone_number')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->unique();
-            $table->foreignId('experience_and_projects_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
