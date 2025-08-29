@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             CourseSeeder::class,
             InstitutionSeeder::class,
+            BenefitsTemplate::class,
         ]);
 
         // Se você tiver outros seeders, pode chamá-los aqui também

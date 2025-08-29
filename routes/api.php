@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\ConnectionsController;
 use App\Http\Controllers\Api\InstitutionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\ExperienceAndProjectController;
+use App\Http\Controllers\Api\BenefitsTemplateController;
 
 Route::apiResource('students', StudentController::class)->except(['update', 'store']);
 
@@ -70,6 +71,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/connections/{connection}', [ConnectionsController::class, 'update']);
     Route::delete('/connections/{connection}', [ConnectionsController::class, 'destroy']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('benefits-templates', BenefitsTemplateController::class);
+});
+
 
 // Rotas de autenticação
 Route::prefix('auth')->group(function () {
