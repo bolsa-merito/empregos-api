@@ -81,26 +81,26 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    
+
+    // Rota GET para quando usuário clica no email (protegida)
+    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyViaGet'])
+        ->middleware('signed')
+        ->name('verification.verify');
+
+    // Rota POST para verificação via API
+    Route::post('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+        ->middleware('signed')
+        ->name('verification.verify.post');
+
     // Rotas protegidas por autenticação
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/user', [AuthController::class, 'user']);
-        
+
         // Verificação de email
         Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])
             ->middleware('throttle:6,1')
             ->name('verification.send');
-        
-        // Rota GET para quando usuário clica no email (protegida)
-        Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyViaGet'])
-            ->middleware('signed')
-            ->name('verification.verify');
-            
-        // Rota POST para verificação via API
-        Route::post('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-            ->middleware('signed')
-            ->name('verification.verify.post');
     });
 });
 
